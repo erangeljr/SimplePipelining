@@ -19,12 +19,12 @@ public class TestPipelining {
 		}
 		
 		if(args.length < 2){
-			System.out.printf("Usage: java PipeLining inputFile outputFile\n");
+			System.out.printf("Usage: java TestPipelining inputFile outputFile\n");
 			return;
 		}
-//		Thread t = new Thread(new GetDataFromFile(args[0], PLSharedData.pOut12));
-//		t.start();
-//		
+		Thread t = new Thread(new GetDataFromFile(args[0], PLSharedData.pOut12));
+		t.start();
+		
 //		t = new Thread(new LowerToUpper(PLSharedData.pIn12));
 //		t.start();
 	}
@@ -32,13 +32,13 @@ public class TestPipelining {
 
 class GetDataFromFile implements Runnable{
 	
-	FileReader fIn = null;
-	PrintStream out = null;
+	FileReader fileIn = null;
+	DataOutputStream out = null;
 	
 	public GetDataFromFile(String fileName, PipedOutputStream pOut){
 		try{ 
-			fIn = new FileReader(fileName);
-			out = new PrintStream(pOut, true);
+			fileIn = new FileReader(fileName);
+			out = new DataOutputStream(pOut);
 		}
 		catch(FileNotFoundException ex){
 			
@@ -46,18 +46,18 @@ class GetDataFromFile implements Runnable{
 	}
 	
 	public void run(){
-		int ch;
+		int data;
 		try {
 			while(true){
-				ch = fIn.read();
+				data = fileIn.read();
 				
-				out.print(ch);
-				if(ch == -1){
+				out.writeInt(data);
+				if(data == -1){
 					out.close();
-					fIn.close();
+					fileIn.close();
 					return;
 				}
-				System.out.printf("%c", (char) ch);
+				System.out.printf("%c", (char) data);
 				
 			}
 			
