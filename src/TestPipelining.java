@@ -29,3 +29,45 @@ public class TestPipelining {
 //		t.start();
 	}
 }
+
+class GetDataFromFile implements Runnable{
+	
+	FileReader fIn = null;
+	PrintStream out = null;
+	
+	public GetDataFromFile(String fileName, PipedOutputStream pOut){
+		try{ 
+			fIn = new FileReader(fileName);
+			out = new PrintStream(pOut, true);
+		}
+		catch(FileNotFoundException ex){
+			
+		}
+	}
+	
+	public void run(){
+		int ch;
+		try {
+			while(true){
+				ch = fIn.read();
+				
+				out.print(ch);
+				if(ch == -1){
+					out.close();
+					fIn.close();
+					return;
+				}
+				System.out.printf("%c", (char) ch);
+				
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return;
+		
+	}
+	
+	
+}
