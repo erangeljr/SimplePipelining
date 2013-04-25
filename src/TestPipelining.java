@@ -50,8 +50,8 @@ class GetDataFromFile implements Runnable{
 		try {
 			while(true){
 				data = fileIn.read();
-				
 				out.writeInt(data);
+				out.flush();
 				if(data == -1){
 					out.close();
 					fileIn.close();
