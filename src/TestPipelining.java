@@ -26,11 +26,11 @@ public class TestPipelining {
 		Thread t = new Thread(new GetDataFromFile(args[0], PLSharedData.pOut12));
 		t.start();
 		
-		t = new Thread(new LowerToUpper(PLSharedData.pIn12, PLSharedData.pOut12));
-		t.start();
+		Thread t2 = new Thread(new LowerToUpper(PLSharedData.pIn12, PLSharedData.pOut23));
+		t2.start();
 		
-		t = new Thread(new UpperToLower(PLSharedData.pIn12));
-		t.start();
+		Thread t3 = new Thread(new UpperToLower(PLSharedData.pIn23));
+		t3.start();
 	}
 }
 
