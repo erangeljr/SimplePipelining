@@ -12,7 +12,7 @@ public class TestPipelining {
 		try{
 			PLSharedData.pOut12 = new PipedOutputStream();
 			PLSharedData.pIn12 = new PipedInputStream(PLSharedData.pOut12);
-			PLSharedData.pOut23 = new PipedOutputStream(PLSharedData.pIn12);
+			PLSharedData.pOut23 = new PipedOutputStream();
 			PLSharedData.pIn23 = new PipedInputStream(PLSharedData.pOut23 );
 			
 		}
