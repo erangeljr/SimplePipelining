@@ -91,7 +91,7 @@ class LowerToUpper implements Runnable{
 		while(true){
 			try {
 				data = in.readInt();
-				out.write(data);
+				out.writeInt(data);
 				out.flush();
 				if(data == -1){
 					in.close();
