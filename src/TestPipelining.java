@@ -12,6 +12,9 @@ public class TestPipelining {
 		try{
 			PLSharedData.pOut12 = new PipedOutputStream();
 			PLSharedData.pIn12 = new PipedInputStream(PLSharedData.pOut12);
+			PLSharedData.pOut23 = new PipedOutputStream(PLSharedData.pIn12);
+			PLSharedData.pIn23 = new PipedInputStream(PLSharedData.pOut23 );
+			
 		}
 		catch(IOException e){
 			System.out.printf("Exception occurred in Piped I/O initializtion.\n");
@@ -26,11 +29,11 @@ public class TestPipelining {
 		Thread t = new Thread(new GetDataFromFile(args[0], PLSharedData.pOut12));
 		t.start();
 		
-		Thread t2 = new Thread(new LowerToUpper(PLSharedData.pIn12, PLSharedData.pOut23));
-		t2.start();
+		t = new Thread(new LowerToUpper(PLSharedData.pIn12, PLSharedData.pOut23));
+		t.start();
 		
-		Thread t3 = new Thread(new UpperToLower(PLSharedData.pIn23));
-		t3.start();
+		t = new Thread(new UpperToLower(PLSharedData.pIn23));
+		t.start();
 	}
 }
 
