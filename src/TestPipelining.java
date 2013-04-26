@@ -104,12 +104,29 @@ class UpperToLower implements Runnable{
 	
 	DataInputStream in = null;
 	
-	public UpperToLower(){
-		
+	public UpperToLower(PipedInputStream pIn){
+		in = new DataInputStream(pIn);
 	}
 	
 	public void run(){
-		
+		int data = 0;
+		int count = 0;
+		while(true){
+			try {
+				data = in.readInt();
+				if(data == -1){
+					in.close();
+					System.out.printf("\nCharacters read: %d\n", count);
+					return;
+				}
+				count++;
+		        System.out.printf("%c", Character.toLowerCase( (char) data) );
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
+		}
 	}
 }
 
