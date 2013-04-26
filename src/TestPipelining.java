@@ -101,6 +101,7 @@ class LowerToUpper implements Runnable{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return;
 			}
 	
 				
@@ -132,6 +133,7 @@ class UpperToLower implements Runnable{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return;
 			}
 					
 		}
