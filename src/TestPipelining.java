@@ -99,3 +99,17 @@ class LowerToUpper implements Runnable{
 		}
 	}
 }
+
+class UpperToLower implements Runnable{
+	
+	DataInputStream in = null;
+	
+	public UpperToLower(){
+		
+	}
+	
+	public void run(){
+		
+	}
+}
+
