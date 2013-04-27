@@ -5,5 +5,7 @@ public class PLSharedData {
 	static PipedInputStream pIn12 = null;
 	static PipedOutputStream pOut23 = null;
 	static PipedInputStream pIn23 = null;
+	static PipedOutputStream pOut34 = null;
+	static PipedInputStream pIn34 = null;
 	
 }
