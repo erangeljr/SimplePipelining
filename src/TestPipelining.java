@@ -37,7 +37,7 @@ public class TestPipelining {
 		t = new Thread(new UpperToLower(PLSharedData.pIn23));
 		t.start();
 		
-		t = new Thread(new WriteDataToFile(PLSharedData.pOut34, args[2]));
+		t = new Thread(new WriteDataToFile(PLSharedData.pIn34, args[2]));
 		t.start();
 	}
 }
@@ -45,15 +45,40 @@ public class TestPipelining {
 class WriteDataToFile implements Runnable{
 	
 	FileWriter fileOut = null;
-	DataOutputStream out = null;
+	DataInputStream in = null;
 	
-	public WriteDataToFile(PipedOutputStream pOut, String FileName){
-		
+	public WriteDataToFile(PipedInputStream pIn, String fileName){
+		try{
+			fileOut = new FileWriter(fileName);
+			in = new DataInputStream(pIn);
+		}
+		catch(IOException ex){
+			
+		}
 	}
 	
 	public void run(){
-		
+		int data;
+		try {
+			while(true){
+				data = in.read();
+				fileOut.append((char) data);
+				fileOut.flush();
+				if(data == -1){
+					in.close();
+					fileOut.close();
+					return;
+				}
+				
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return;
 	}
+
 }
 
 class GetDataFromFile implements Runnable{
