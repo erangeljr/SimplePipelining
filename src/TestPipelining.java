@@ -36,6 +36,23 @@ public class TestPipelining {
 		
 		t = new Thread(new UpperToLower(PLSharedData.pIn23));
 		t.start();
+		
+		t = new Thread(new WriteDataToFile(PLSharedData.pOut34, args[2]));
+		t.start();
+	}
+}
+
+class WriteDataToFile implements Runnable{
+	
+	FileWriter fileOut = null;
+	DataOutputStream out = null;
+	
+	public WriteDataToFile(PipedOutputStream pOut, String FileName){
+		
+	}
+	
+	public void run(){
+		
 	}
 }
 
