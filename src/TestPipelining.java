@@ -14,6 +14,8 @@ public class TestPipelining {
 			PLSharedData.pIn12 = new PipedInputStream(PLSharedData.pOut12);
 			PLSharedData.pOut23 = new PipedOutputStream();
 			PLSharedData.pIn23 = new PipedInputStream(PLSharedData.pOut23 );
+			PLSharedData.pOut34 = new PipedOutputStream();
+			PLSharedData.pIn34 = new PipedInputStream(PLSharedData.pOut34);
 			
 		}
 		catch(IOException e){
