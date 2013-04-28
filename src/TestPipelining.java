@@ -37,7 +37,7 @@ public class TestPipelining {
 		t = new Thread(new UpperToLower(PLSharedData.pIn23, PLSharedData.pOut34));
 		t.start();
 		
-		t = new Thread(new WriteDataToFile(PLSharedData.pIn34, args[2]));
+		t = new Thread(new WriteDataToFile(PLSharedData.pIn34, args[1]));
 		t.start();
 	}
 }
