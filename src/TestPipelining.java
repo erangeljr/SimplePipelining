@@ -174,8 +174,11 @@ class UpperToLower implements Runnable{
 		while(true){
 			try {
 				data = in.readInt();
+				out.writeInt(data);
+				out.flush();
 				if(data == -1){
 					in.close();
+					out.close();
 					System.out.printf("\nCharacters read: %d\n", count);
 					return;
 				}
