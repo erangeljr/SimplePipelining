@@ -34,7 +34,7 @@ public class TestPipelining {
 		t = new Thread(new LowerToUpper(PLSharedData.pIn12, PLSharedData.pOut23));
 		t.start();
 		
-		t = new Thread(new UpperToLower(PLSharedData.pIn23));
+		t = new Thread(new UpperToLower(PLSharedData.pIn23, PLSharedData.pOut34));
 		t.start();
 		
 		t = new Thread(new WriteDataToFile(PLSharedData.pIn34, args[2]));
@@ -59,6 +59,7 @@ class WriteDataToFile implements Runnable{
 	
 	public void run(){
 		int data;
+		int count = 0;
 		try {
 			while(true){
 				data = in.read();
@@ -67,9 +68,10 @@ class WriteDataToFile implements Runnable{
 				if(data == -1){
 					in.close();
 					fileOut.close();
+					System.out.printf("\nCharacters read: %d\n", count);
 					return;
 				}
-				
+				count++;
 			}
 			
 		} catch (IOException e) {
@@ -159,9 +161,11 @@ class LowerToUpper implements Runnable{
 class UpperToLower implements Runnable{
 	
 	DataInputStream in = null;
+	DataOutputStream out = null;
 	
-	public UpperToLower(PipedInputStream pIn){
+	public UpperToLower(PipedInputStream pIn, PipedOutputStream pOut){
 		in = new DataInputStream(pIn);
+		out = new DataOutputStream(pOut);
 	}
 	
 	public void run(){
